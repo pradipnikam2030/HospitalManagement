@@ -1,9 +1,12 @@
 package com.example.HospitalManagement;
 
+import com.example.HospitalManagement.dto.AppointmentResponseDto;
+import com.example.HospitalManagement.dto.CreateAppointmentRequestDto;
 import com.example.HospitalManagement.entity.Appointment;
 import com.example.HospitalManagement.repo.AppointmentRepository;
 import com.example.HospitalManagement.service.AppointmentService;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,6 +23,8 @@ public class AppointmentTest {
     @Autowired
     AppointmentService appointmentService;
 
+    private ModelMapper modelMapper;
+
     @Test
     public void testAppointment() throws IllegalAccessException {
         Appointment appointment = Appointment.builder()
@@ -27,11 +32,12 @@ public class AppointmentTest {
                 .appointmentTime(LocalDateTime.of(LocalDate.of(2025, 9, 25), LocalTime.of(14, 00, 00)))
                 .build();
 
+        CreateAppointmentRequestDto createAppointmentRequestDto = modelMapper.map(appointment, CreateAppointmentRequestDto.class);
 
-        Appointment appointment1 = appointmentService.createAppointment(appointment, 6L, 2L);
+        AppointmentResponseDto appointment1 = appointmentService.createAppointment(createAppointmentRequestDto);
         //System.out.println(appointment1);
 
-        Appointment appointment2 = appointmentService.reassignAppointmentToAnotherDoctor(appointment1.getId(), 2L);
+        AppointmentResponseDto appointment2 = appointmentService.reassignAppointmentToAnotherDoctor(appointment1.getId(), 2L);
         //System.out.println(appointment2);
     }
 }
