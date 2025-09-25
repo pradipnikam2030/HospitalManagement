@@ -1,3 +1,4 @@
+/*
 INSERT INTO patient (name, email, birth_date, gender, blood_group)
 VALUES
 ('Radha Pawar', 'radha@gmail.com', '2001-09-12', 'FEMALE', 'B_POSITIVE'),
@@ -65,3 +66,4 @@ VALUES ('2025-09-27 10:45:00', 'Skin Rash Consultation', 5, 5);
 
 
 
+*/
